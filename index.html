@@ -1,5 +1,14 @@
 Segment Test!
 
+<form onsubmit="return reportDownloaded();">
+  Email:<br>
+  <input type="text" name="email" id="emailInput">
+  <br>
+  <input type="submit" value="Submit">
+</form> 
+
+<button id=myButton onclick="reportDownloaded()" style="font-size:50">Download Report</button>
+
 <script type="text/javascript">
 	var writeKey = 'Uuel9igVwbCyM7y7TlT1sIQBs7Sli6hQ'; 
 	var segmentSource = 'https://app.segment.com/brantleybeaird/sources/bbeaird_github_io/overview';
@@ -14,4 +23,17 @@ Segment Test!
 	});
 	}}();
 	console.log('foo');
+
+	function reportDownloaded() {
+		console.log('reportDownloaded function executed');
+		analytics.track('Report Downloaded', {
+			report_name: 'Erfolgreich Traden Im Alter' // or javascript getting the report name from some page metadata
+		})
+		var email = document.getElementById("emailInput").value
+		analytics.identify(email, {
+			email: email
+		})
+		console.log("Email submitted is" + ' ' + email);
+		alert("Email submitted is" + ' ' + email);
+	}
 </script>
