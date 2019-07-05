@@ -20,7 +20,29 @@
 	
 	  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
 // 	  analytics.load("YOUR_WRITE_KEY");
-  (function() {
+	  analytics.page({}, {}, function() {
+	  console.log('Segment writeKey is - ' + writeKey + ' - which is for the Segment source - ' + segmentSource);
+	});
+	  }}();
+	
+
+	console.log('foo');
+	function reportDownloaded() {
+		console.log('reportDownloaded function executed');
+		analytics.track('Report Downloaded', {
+			report_name: 'Erfolgreich Traden Im Alter' // or javascript getting the report name from some page metadata
+		})
+		var email = document.getElementById("emailInput").value
+		analytics.identify(email, {
+			email: email
+		})
+		console.log("Email submitted is" + ' ' + email);
+		alert("Email submitted is" + ' ' + email);
+	}
+</script>
+
+<script>
+(function() {
     // Change 'script' to whatever element you want to create, e.g. 'img' or 'input'.
     var el = document.createElement('div');
     
@@ -70,23 +92,3 @@
   defer
 ></script>
 <script>
-	  analytics.page({}, {}, function() {
-	  console.log('Segment writeKey is - ' + writeKey + ' - which is for the Segment source - ' + segmentSource);
-	});
-	  }}();
-	console.log('foo');
-	function reportDownloaded() {
-		console.log('reportDownloaded function executed');
-		analytics.track('Report Downloaded', {
-			report_name: 'Erfolgreich Traden Im Alter' // or javascript getting the report name from some page metadata
-		})
-		var email = document.getElementById("emailInput").value
-		analytics.identify(email, {
-			email: email
-		})
-		console.log("Email submitted is" + ' ' + email);
-		alert("Email submitted is" + ' ' + email);
-	}
-
-	
-</script>
