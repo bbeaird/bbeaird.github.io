@@ -21,6 +21,59 @@
 	
 	  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
 // 	  analytics.load("YOUR_WRITE_KEY");
+
+  (function() {
+    // Change 'script' to whatever element you want to create, e.g. 'img' or 'input'.
+    var el = document.createElement('div');
+    
+    // Add any standard attributes you need, e.g. 'src', 'width', 'type', 'name'.
+    el.setAttribute('id', 'target-container');
+        
+    // Finally, inject the element to the end of <body>
+    document.body.appendChild(el);
+  })();
+
+  window.consentManagerConfig = function(exports) {
+    var React = exports.React
+    var inEU = exports.inEU
+
+    var bannerContent = React.createElement(
+      'span',
+      null,
+      'We use cookies (and other similar technologies) to collect data to improve your experience on our site. By using our website, you՚re agreeing to the collection of data as described in our',
+      ' ',
+      React.createElement(
+        'a',
+        {href: '/docs/legal/website-data-collection-policy/', target: '_blank'},
+        'Website Data Collection Policy'
+      ),
+      '.'
+    )
+    var bannerSubContent = 'You can change your preferences at any time.'
+    var preferencesDialogTitle = 'Website Data Collection Preferences'
+    var preferencesDialogContent = 'We use data collected by cookies and JavaScript libraries to improve your browsing experience, analyze site traffic, deliver personalized advertisements, and increase the overall performance of our site.'
+    var cancelDialogTitle = 'Are you sure you want to cancel?'
+    var cancelDialogContent = 'Your preferences have not been saved. By continuing to use our website, you՚re agreeing to our Website Data Collection Policy.'
+
+    return {
+      container: '#target-container',
+      writeKey: 'wG7Nq4emP5magcHFlWMruAuTT6DZgAuW',
+      shouldRequireConsent: inEU,
+      bannerContent: bannerContent,
+      bannerSubContent: bannerSubContent,
+      preferencesDialogTitle: preferencesDialogTitle,
+      preferencesDialogContent: preferencesDialogContent,
+      cancelDialogTitle: cancelDialogTitle,
+      cancelDialogContent: cancelDialogContent
+    }
+  }
+<script
+  src="https://unpkg.com/@segment/consent-manager@1.2.0/standalone/consent-manager.js"
+  crossorigin="anonymous"
+  defer
+></script>
+
+
 	  analytics.page({}, {}, function() {
 	  console.log('Segment writeKey is - ' + writeKey + ' - which is for the Segment source - ' + segmentSource);
 	});
