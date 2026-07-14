@@ -1,0 +1,338 @@
+[
+  {
+    "id": "fund-001",
+    "category": "fundamentals",
+    "subtopic": "llm-basics",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "At its core, what is a large language model doing when it generates text?",
+    "options": [
+      "Looking up answers in a database of facts",
+      "Repeatedly predicting the most likely next token given the text so far",
+      "Running a search engine query and summarizing the results",
+      "Executing hand-written grammar rules"
+    ],
+    "correct_index": 1,
+    "explanation": "LLMs are trained to predict the next token (a word or word fragment) given everything before it. Generation is just running that prediction over and over. There's no database lookup — knowledge is encoded implicitly in the model's weights during training.",
+    "nuance": "This is why LLMs can 'know' something in one phrasing but miss it in another — knowledge is statistical, not stored as discrete facts.",
+    "source_title": "DeepLearning.AI — How LLMs Work",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2023-06-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-002",
+    "category": "fundamentals",
+    "subtopic": "llm-basics",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "Which 2017 paper introduced the transformer architecture that underpins modern LLMs?",
+    "options": [
+      "\"ImageNet Classification with Deep CNNs\"",
+      "\"Attention Is All You Need\"",
+      "\"Playing Atari with Deep Reinforcement Learning\"",
+      "\"BERT: Pre-training of Deep Bidirectional Transformers\""
+    ],
+    "correct_index": 1,
+    "explanation": "\"Attention Is All You Need\" (Vaswani et al., Google, 2017) introduced the transformer, replacing recurrence with self-attention. Nearly every frontier model today — GPT, Claude, Gemini, Llama — is a descendant of this architecture.",
+    "nuance": "BERT (2018) built on transformers but was encoder-only; today's chat LLMs are mostly decoder-only transformers.",
+    "source_title": "Vaswani et al., \"Attention Is All You Need\" (arXiv)",
+    "source_url": "https://arxiv.org/abs/1706.03762",
+    "source_date": "2017-06-12",
+    "evergreen": true
+  },
+  {
+    "id": "fund-003",
+    "category": "fundamentals",
+    "subtopic": "training",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What's the difference between pre-training and fine-tuning?",
+    "options": [
+      "Pre-training uses labeled data; fine-tuning uses unlabeled data",
+      "Pre-training teaches broad language ability from massive data; fine-tuning adapts the model to specific tasks or behaviors with smaller targeted data",
+      "They are two names for the same process",
+      "Fine-tuning happens before pre-training to prepare the dataset"
+    ],
+    "correct_index": 1,
+    "explanation": "Pre-training is the expensive phase: learning general language and world knowledge from trillions of tokens. Fine-tuning is a cheaper second phase that adapts the pre-trained model — for chat behavior, a domain, or a format — using much smaller datasets.",
+    "nuance": "Instruction tuning and RLHF are types of post-training — the step that turns a raw text predictor into a helpful assistant.",
+    "source_title": "DeepLearning.AI — Generative AI for Everyone",
+    "source_url": "https://www.deeplearning.ai/courses/generative-ai-for-everyone/",
+    "source_date": "2023-11-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-004",
+    "category": "fundamentals",
+    "subtopic": "rag",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What problem does Retrieval-Augmented Generation (RAG) primarily solve?",
+    "options": [
+      "It makes models generate text faster",
+      "It lets a model use knowledge that isn't in its training data — like private docs or recent info — by retrieving relevant text and adding it to the prompt",
+      "It reduces the cost of training a model from scratch",
+      "It compresses the model so it fits on smaller hardware"
+    ],
+    "correct_index": 1,
+    "explanation": "RAG fetches relevant documents (usually via embedding search) and inserts them into the model's context before it answers. The model grounds its response in that retrieved text instead of relying purely on trained-in knowledge, which reduces hallucination and enables up-to-date, private-data answers.",
+    "nuance": "RAG quality is usually limited by retrieval quality, not the model — if the right document isn't retrieved, no model can answer correctly.",
+    "source_title": "DeepLearning.AI — The Batch on RAG",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2023-09-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-005",
+    "category": "fundamentals",
+    "subtopic": "embeddings",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What is an embedding?",
+    "options": [
+      "A compressed copy of a model that runs on phones",
+      "A numeric vector representing text (or images) such that semantically similar content ends up close together in vector space",
+      "A hidden watermark added to AI-generated text",
+      "The final layer of a neural network"
+    ],
+    "correct_index": 1,
+    "explanation": "Embeddings map content to vectors of numbers where distance reflects meaning: 'How do I get a refund?' lands near 'return policy' even though they share no keywords. This is what powers semantic search, RAG retrieval, recommendations, and clustering.",
+    "nuance": "Embedding models are separate, much smaller models than chat LLMs — you can mix an embedding model from one provider with a chat model from another.",
+    "source_title": "Anthropic docs — Embeddings",
+    "source_url": "https://docs.anthropic.com/en/docs/build-with-claude/embeddings",
+    "source_date": "2024-05-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-006",
+    "category": "fundamentals",
+    "subtopic": "context-windows",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What is a model's \"context window\"?",
+    "options": [
+      "The time period the model's training data covers",
+      "The maximum amount of text (in tokens) the model can consider at once — prompt plus response",
+      "The number of users who can query the model simultaneously",
+      "The UI panel where you type your prompt"
+    ],
+    "correct_index": 1,
+    "explanation": "The context window is the model's working memory, measured in tokens. Everything — system prompt, conversation history, retrieved documents, and the answer being generated — must fit inside it. Exceed it and the oldest content gets truncated or the request fails.",
+    "nuance": "Bigger isn't automatically better: models can struggle to use information buried in the middle of very long contexts, and long prompts cost more and run slower.",
+    "source_title": "Anthropic docs — Context windows",
+    "source_url": "https://docs.anthropic.com/en/docs/build-with-claude/context-windows",
+    "source_date": "2024-03-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-007",
+    "category": "fundamentals",
+    "subtopic": "hallucination",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "In AI, what does \"hallucination\" mean?",
+    "options": [
+      "The model refusing to answer a valid question",
+      "The model confidently generating false or fabricated information as if it were fact",
+      "The model repeating the same phrase in a loop",
+      "The model leaking its system prompt"
+    ],
+    "correct_index": 1,
+    "explanation": "Hallucination is confident fabrication: invented citations, wrong dates, plausible-sounding but false claims. It's a direct consequence of how LLMs work — they generate statistically plausible text, and plausible isn't the same as true.",
+    "nuance": "Mitigations include RAG (grounding in real documents), asking the model to cite sources, giving it permission to say 'I don't know,' and human review for high-stakes output — but no current technique eliminates it.",
+    "source_title": "DeepLearning.AI — The Batch",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2023-04-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-008",
+    "category": "fundamentals",
+    "subtopic": "training",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "What role does RLHF (Reinforcement Learning from Human Feedback) play in building a chat model?",
+    "options": [
+      "It's how the model learns basic grammar and facts",
+      "It aligns the model's behavior with human preferences — making it helpful, harmless, and conversational — after pre-training",
+      "It lets the model browse the web during conversations",
+      "It compresses the model for cheaper inference"
+    ],
+    "correct_index": 1,
+    "explanation": "After pre-training produces a raw next-token predictor, RLHF (and successors like RLAIF and DPO) trains the model on human preference judgments — which of two responses is better — so it learns to be helpful, follow instructions, and refuse harmful requests.",
+    "nuance": "This is why base models and chat models from the same family behave so differently: the knowledge is similar, but the behavior is shaped in post-training.",
+    "source_title": "DeepLearning.AI — RLHF short course",
+    "source_url": "https://www.deeplearning.ai/short-courses/",
+    "source_date": "2023-08-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-009",
+    "category": "fundamentals",
+    "subtopic": "llm-basics",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What does the \"temperature\" setting control in an LLM API call?",
+    "options": [
+      "How fast the model responds",
+      "How random vs. deterministic the model's token choices are",
+      "How much the request costs",
+      "How recent the model's knowledge is"
+    ],
+    "correct_index": 1,
+    "explanation": "Temperature scales the randomness of token sampling. Low temperature (near 0) makes the model consistently pick its top choice — good for extraction and factual tasks. Higher temperature spreads probability across more options — useful for creative variety.",
+    "nuance": "Even temperature 0 isn't perfectly deterministic in practice on most hosted APIs due to hardware-level nondeterminism.",
+    "source_title": "Anthropic API docs",
+    "source_url": "https://docs.anthropic.com/en/api/messages",
+    "source_date": "2024-01-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-010",
+    "category": "fundamentals",
+    "subtopic": "rag",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "Your company's internal policy docs change weekly, and you need a chatbot that answers from them accurately. Fine-tuning or RAG?",
+    "options": [
+      "Fine-tune weekly on the latest docs",
+      "RAG — retrieve current docs at query time, so answers always reflect the latest version",
+      "Train a new model from scratch on the docs",
+      "Neither; LLMs can't use private documents"
+    ],
+    "correct_index": 1,
+    "explanation": "RAG is the right tool for fast-changing knowledge: update the document index and answers update instantly. Fine-tuning bakes knowledge into weights — it's slow, expensive to repeat weekly, and bad at reliably reproducing specific facts anyway.",
+    "nuance": "Rule of thumb: fine-tune for behavior (style, format, domain reasoning patterns), RAG for knowledge (facts that change or must be cited).",
+    "source_title": "Andrew Ng — The Batch",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2024-02-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-011",
+    "category": "fundamentals",
+    "subtopic": "evals",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "Why do AI teams insist on building \"evals\" instead of judging model output by feel?",
+    "options": [
+      "Evals are legally required for AI products",
+      "Systematic test sets catch regressions and let you compare prompts/models objectively — vibes don't scale and miss silent failures",
+      "Evals make the model itself smarter",
+      "Manual review is impossible for LLM outputs"
+    ],
+    "correct_index": 1,
+    "explanation": "An eval is a repeatable test suite for AI behavior: a set of inputs with graded expected outputs. Without one, a prompt tweak that fixes one case can silently break ten others, and you can't tell whether a new model actually improves your product.",
+    "nuance": "Practitioners often say evals are the most durable asset an AI team builds — models and prompts churn, but a good eval set keeps paying off.",
+    "source_title": "Lenny's Newsletter — on AI product evals",
+    "source_url": "https://www.lennysnewsletter.com/",
+    "source_date": "2024-09-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-012",
+    "category": "fundamentals",
+    "subtopic": "agents",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What makes an AI system an \"agent\" rather than a simple chatbot?",
+    "options": [
+      "It has a human name and avatar",
+      "It runs in a loop: deciding on actions, using tools (search, code, APIs), observing results, and iterating toward a goal",
+      "It responds faster than one second",
+      "It was trained with reinforcement learning"
+    ],
+    "correct_index": 1,
+    "explanation": "An agent is an LLM given tools and autonomy: it plans, takes an action (call an API, run code, search), observes the result, and decides the next step — repeating until the task is done. A chatbot just produces one response per message.",
+    "nuance": "Agency is a spectrum, not a binary — a single tool call is barely agentic; booking your travel end-to-end across ten sites is very agentic. Reliability drops as autonomy and step count grow.",
+    "source_title": "Anthropic — Building effective agents",
+    "source_url": "https://www.anthropic.com/research/building-effective-agents",
+    "source_date": "2024-12-19",
+    "evergreen": true
+  },
+  {
+    "id": "fund-013",
+    "category": "fundamentals",
+    "subtopic": "mcp",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What is MCP (Model Context Protocol)?",
+    "options": [
+      "A benchmark for measuring model reasoning",
+      "An open standard for connecting AI applications to external tools and data sources — like a USB-C port for AI",
+      "OpenAI's proprietary plugin system",
+      "A compression format for model weights"
+    ],
+    "correct_index": 1,
+    "explanation": "MCP, introduced by Anthropic in November 2024, standardizes how AI apps connect to tools and data. Instead of every app writing custom integrations for every service, a service exposes one MCP server and any MCP-compatible client can use it.",
+    "nuance": "Its significance grew in 2025 when other major labs, including OpenAI and Google, adopted it — making it the closest thing to an industry-wide agent-tooling standard.",
+    "source_title": "Anthropic — Introducing the Model Context Protocol",
+    "source_url": "https://www.anthropic.com/news/model-context-protocol",
+    "source_date": "2024-11-25",
+    "evergreen": true
+  },
+  {
+    "id": "fund-014",
+    "category": "fundamentals",
+    "subtopic": "llm-basics",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What is a \"token\" in LLM terms?",
+    "options": [
+      "A unit of payment for API access",
+      "A chunk of text — often a word fragment — that models read and generate; roughly 3/4 of an English word on average",
+      "A security credential for authenticating API calls",
+      "One complete sentence"
+    ],
+    "correct_index": 1,
+    "explanation": "Models don't see letters or words; they see tokens — subword units from a fixed vocabulary. 'unbelievable' might be 'un-believ-able.' API pricing, context limits, and speed are all measured in tokens.",
+    "nuance": "Tokenization explains some odd failures, like miscounting letters in a word — the model literally doesn't see individual characters.",
+    "source_title": "Anthropic docs — Glossary",
+    "source_url": "https://docs.anthropic.com/en/docs/resources/glossary",
+    "source_date": "2024-01-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-015",
+    "category": "fundamentals",
+    "subtopic": "training",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "What distinguishes \"reasoning models\" (like OpenAI's o-series or Claude's extended thinking) from standard chat models?",
+    "options": [
+      "They are trained only on math textbooks",
+      "They spend extra inference-time compute generating internal reasoning steps before answering, trading speed and cost for better performance on hard problems",
+      "They have access to calculators and search engines by default",
+      "They have much larger context windows"
+    ],
+    "correct_index": 1,
+    "explanation": "Reasoning models 'think before answering' — generating extended chains of internal reasoning tokens. This inference-time compute dramatically improves math, coding, and multi-step logic, at the cost of higher latency and price per query.",
+    "nuance": "This established a second scaling axis: instead of only making models bigger (training compute), labs now also scale how long models think (inference compute).",
+    "source_title": "DeepLearning.AI — The Batch on reasoning models",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2024-10-01",
+    "evergreen": true
+  },
+  {
+    "id": "fund-016",
+    "category": "fundamentals",
+    "subtopic": "embeddings",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "A user searches your help center for \"my payment didn't go through.\" The best-matching article is titled \"Resolving failed transactions.\" Which search approach finds it?",
+    "options": [
+      "Exact keyword matching — the words must overlap",
+      "Embedding-based semantic search — it matches meaning, so 'payment didn't go through' lands near 'failed transactions'",
+      "Sorting articles alphabetically",
+      "Filtering by article publish date"
+    ],
+    "correct_index": 1,
+    "explanation": "Keyword search fails here — the query and title share almost no words. Semantic search embeds both into vectors where meaning determines proximity, so paraphrases match. This is the core retrieval mechanism behind most RAG systems.",
+    "nuance": "Production systems often combine both ('hybrid search'): keywords catch exact terms like error codes and product names that embeddings can blur.",
+    "source_title": "DeepLearning.AI — vector search courses",
+    "source_url": "https://www.deeplearning.ai/short-courses/",
+    "source_date": "2023-10-01",
+    "evergreen": true
+  }
+]

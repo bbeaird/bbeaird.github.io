@@ -1,0 +1,312 @@
+[
+  {
+    "id": "mod-001",
+    "category": "models",
+    "subtopic": "frontier-labs",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "Match the model family to its lab: Claude, Gemini, Llama.",
+    "options": [
+      "OpenAI, Meta, Google",
+      "Anthropic, Google, Meta",
+      "Google, Anthropic, Mistral",
+      "Anthropic, Meta, Google"
+    ],
+    "correct_index": 1,
+    "explanation": "Claude is Anthropic's model family, Gemini is Google's (DeepMind), and Llama is Meta's open-weights family. Knowing the lab tells you a lot about a model's positioning: Anthropic emphasizes safety and coding, Google leans multimodal and long-context, Meta champions open weights.",
+    "nuance": "OpenAI's GPT models and xAI's Grok round out the major US frontier families; DeepSeek and Qwen (Alibaba) lead the Chinese open-weights ecosystem.",
+    "source_title": "The AI Daily Brief (podcast) — lab landscape coverage",
+    "source_url": null,
+    "source_date": "2025-01-01",
+    "evergreen": false
+  },
+  {
+    "id": "mod-002",
+    "category": "models",
+    "subtopic": "open-weights",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What does it mean for a model to be \"open-weights\"?",
+    "options": [
+      "Its training data is fully public",
+      "The trained model weights are downloadable, so anyone can run or fine-tune it themselves — though the training data and code may stay private",
+      "It's free to use through any API",
+      "It has no usage restrictions of any kind"
+    ],
+    "correct_index": 1,
+    "explanation": "Open-weights means you can download and run the model yourself (Llama, DeepSeek, Mistral models). That's distinct from fully open-source — training data, code, and recipes usually remain private, and licenses may still restrict some commercial uses.",
+    "nuance": "Open weights enable self-hosting for privacy, cost control at scale, and fine-tuning freedom — but you take on the infrastructure burden that API providers otherwise handle.",
+    "source_title": "DeepLearning.AI — The Batch on open models",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2024-07-01",
+    "evergreen": true
+  },
+  {
+    "id": "mod-003",
+    "category": "models",
+    "subtopic": "capabilities",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "You need to classify 10 million short customer messages by sentiment, cheaply. Which class of model fits best?",
+    "options": [
+      "The largest frontier reasoning model available",
+      "A small, fast, cheap model (Haiku/Flash/mini class) — the task is simple and volume is huge",
+      "An image-generation model",
+      "A fine-tuned 405B-parameter model"
+    ],
+    "correct_index": 1,
+    "explanation": "Simple, high-volume tasks are exactly what small models are for: sentiment classification doesn't need frontier reasoning, and at 10M calls the cost difference between a small and frontier model is often 20–60x. Match model capability to task difficulty.",
+    "nuance": "A common production pattern is routing: a small model handles the easy 90% and escalates ambiguous cases to a bigger model.",
+    "source_title": "Anthropic docs — Choosing a model",
+    "source_url": "https://docs.anthropic.com/en/docs/about-claude/models",
+    "source_date": "2024-06-01",
+    "evergreen": true
+  },
+  {
+    "id": "mod-004",
+    "category": "models",
+    "subtopic": "capabilities",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "You must analyze a single 500-page contract in one shot. Which model characteristic matters most?",
+    "options": [
+      "Image generation quality",
+      "Context window size — the document must fit in the model's working memory",
+      "Tokens-per-second output speed",
+      "Whether the model is open-weights"
+    ],
+    "correct_index": 1,
+    "explanation": "A 500-page contract is roughly 250k+ tokens, so the binding constraint is context window. Models with 1M+ token windows (Gemini pioneered this class) can ingest it whole; smaller-window models would need chunking and multi-pass strategies.",
+    "nuance": "Fitting isn't everything — test whether the model actually uses information from the middle of long documents well ('needle in a haystack' performance varies).",
+    "source_title": "Google — Gemini long context announcement",
+    "source_url": "https://blog.google/technology/ai/",
+    "source_date": "2024-02-15",
+    "evergreen": false
+  },
+  {
+    "id": "mod-005",
+    "category": "models",
+    "subtopic": "benchmarks",
+    "type": "mc",
+    "difficulty": 3,
+    "prompt": "A new model tops a popular benchmark. Why should you still run your own evaluation before switching?",
+    "options": [
+      "Benchmarks are always fabricated by labs",
+      "Benchmark tasks may not resemble your use case, scores can be inflated by training-data contamination, and top benchmarks saturate — small differences at the top rarely predict real-world wins",
+      "Newer models are always worse at older tasks",
+      "Benchmarks only measure speed, not quality"
+    ],
+    "correct_index": 1,
+    "explanation": "Benchmarks measure narrow skills, and models are sometimes inadvertently (or deliberately) trained on benchmark-like data, inflating scores. A model that wins MMLU by 1% may lose badly on your specific extraction task. Your own eval set is the only benchmark that matters for your product.",
+    "nuance": "This is why experienced teams treat leaderboards as a shortlist generator, not a decision — and why 'benchmark saturation' pushed the industry toward harder, private, and task-specific evals.",
+    "source_title": "The AI Daily Brief (podcast) — benchmark skepticism coverage",
+    "source_url": null,
+    "source_date": "2024-08-01",
+    "evergreen": true
+  },
+  {
+    "id": "mod-006",
+    "category": "models",
+    "subtopic": "architecture",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "What is a \"mixture-of-experts\" (MoE) architecture?",
+    "options": [
+      "Multiple separate models vote on each answer",
+      "A model whose layers contain many specialized sub-networks, with only a few activated per token — giving big-model capability at lower inference cost",
+      "A panel of human experts labels the training data",
+      "An ensemble of models from different companies"
+    ],
+    "correct_index": 1,
+    "explanation": "MoE models have huge total parameter counts but route each token through only a small subset of 'experts,' so compute per token stays manageable. It's how several frontier and open models (e.g., Mixtral, DeepSeek's models) get strong capability efficiently.",
+    "nuance": "This is why 'parameter count' comparisons became misleading — a 600B-parameter MoE may activate only ~37B parameters per token.",
+    "source_title": "DeepLearning.AI — The Batch on MoE",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2024-01-01",
+    "evergreen": true
+  },
+  {
+    "id": "mod-007",
+    "category": "models",
+    "subtopic": "pricing",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "In LLM API pricing, which is typically true?",
+    "options": [
+      "Input and output tokens cost the same",
+      "Output tokens usually cost several times more than input tokens, so long generations drive cost more than long prompts",
+      "You pay per API call regardless of length",
+      "Input tokens cost more than output tokens"
+    ],
+    "correct_index": 1,
+    "explanation": "Providers price input and output separately, and output tokens typically cost 3–5x more because generation is sequential and compute-heavy while input processing parallelizes. A cost-optimization insight: trimming verbose outputs often saves more than trimming prompts.",
+    "nuance": "Prompt caching flips the input side too — cached input tokens can be ~10x cheaper, which matters hugely for agents that resend long contexts repeatedly.",
+    "source_title": "Anthropic — Pricing & prompt caching docs",
+    "source_url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching",
+    "source_date": "2024-08-14",
+    "evergreen": true
+  },
+  {
+    "id": "mod-008",
+    "category": "models",
+    "subtopic": "frontier-labs",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What does the term \"frontier model\" mean?",
+    "options": [
+      "A model designed for use in remote areas",
+      "A model at or near the current state of the art in general capability — the leading edge of what AI can do",
+      "Any model released in the last 6 months",
+      "A model trained on geographic data"
+    ],
+    "correct_index": 1,
+    "explanation": "\"Frontier\" refers to the capability frontier: the handful of most capable general-purpose models at any moment (recent GPT, Claude, and Gemini flagships). The term also carries regulatory weight — 'frontier labs' face the most safety scrutiny.",
+    "nuance": "The frontier moves fast: today's frontier capability tends to appear in models 10–30x cheaper within about a year.",
+    "source_title": "The AI Daily Brief (podcast)",
+    "source_url": null,
+    "source_date": "2024-06-01",
+    "evergreen": true
+  },
+  {
+    "id": "mod-009",
+    "category": "models",
+    "subtopic": "open-weights",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "Mistral AI is best known as…",
+    "options": [
+      "Google's internal model team",
+      "A French lab that made its name with strong, efficient open-weights models",
+      "A vector database company",
+      "An AI chip manufacturer"
+    ],
+    "correct_index": 1,
+    "explanation": "Paris-based Mistral AI became Europe's flagship AI lab by releasing compact open-weights models (Mistral 7B, Mixtral) that punched far above their size, alongside commercial API models. It's a key player in the open-weights ecosystem and European AI policy debates.",
+    "nuance": "Europe's AI story is heavily tied to Mistral — it's frequently cited in EU AI Act discussions as the domestic champion.",
+    "source_title": "DeepLearning.AI — The Batch",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2024-04-01",
+    "evergreen": false
+  },
+  {
+    "id": "mod-010",
+    "category": "models",
+    "subtopic": "capabilities",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What does it mean for a model to be \"multimodal\"?",
+    "options": [
+      "It can run on multiple operating systems",
+      "It can process (and sometimes generate) multiple types of input — text, images, audio, video — not just text",
+      "It supports multiple languages",
+      "It has multiple context windows"
+    ],
+    "correct_index": 1,
+    "explanation": "Multimodal models accept mixed inputs — a screenshot plus a question, an audio clip, a video — and reason across them. Modern frontier models are natively multimodal rather than bolting a vision module onto a text model.",
+    "nuance": "Output multimodality (generating images or audio, not just understanding them) is a separate capability — many models understand images but can't create them.",
+    "source_title": "Google — Gemini announcement",
+    "source_url": "https://blog.google/technology/ai/",
+    "source_date": "2023-12-06",
+    "evergreen": true
+  },
+  {
+    "id": "mod-011",
+    "category": "models",
+    "subtopic": "architecture",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "What is model \"distillation\"?",
+    "options": [
+      "Removing toxic content from training data",
+      "Training a smaller, cheaper model to imitate a larger model's outputs, retaining much of its capability at a fraction of the cost",
+      "Deleting unused weights after training",
+      "Converting a model to run on GPUs"
+    ],
+    "correct_index": 1,
+    "explanation": "In distillation, a large 'teacher' model generates outputs that train a small 'student' model. It's a primary way labs make cheap, fast models that stay surprisingly capable, and it's how open-source communities bootstrap models from frontier outputs.",
+    "nuance": "Distillation is also a competitive flashpoint — labs' terms of service generally prohibit using their outputs to train competing models, a rule at the center of several 2025 disputes.",
+    "source_title": "DeepLearning.AI — The Batch on distillation",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2025-02-01",
+    "evergreen": true
+  },
+  {
+    "id": "mod-012",
+    "category": "models",
+    "subtopic": "capabilities",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "When would you reach for a reasoning model (o-series, extended thinking modes) over a standard fast model?",
+    "options": [
+      "For every request — reasoning models are strictly better",
+      "For genuinely hard multi-step problems — complex math, tricky debugging, intricate planning — where quality justifies extra latency and cost",
+      "For simple lookups and formatting, where speed matters",
+      "Only for image processing"
+    ],
+    "correct_index": 1,
+    "explanation": "Reasoning models trade time and money for depth: they can take many seconds and cost multiples more per query. That's a great trade on hard problems and a bad one for 'summarize this email.' Using them for everything burns budget and slows your product for no gain.",
+    "nuance": "Many products now use hybrid approaches — models or routers that decide per-request how much thinking to apply.",
+    "source_title": "Anthropic — extended thinking docs",
+    "source_url": "https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking",
+    "source_date": "2025-02-24",
+    "evergreen": true
+  },
+  {
+    "id": "mod-013",
+    "category": "models",
+    "subtopic": "open-weights",
+    "type": "tf",
+    "difficulty": 2,
+    "prompt": "True or false: Running an open-weights model yourself is always cheaper than using a hosted API.",
+    "options": ["True", "False"],
+    "correct_index": 1,
+    "explanation": "False. Self-hosting means paying for GPUs (often underutilized), engineering time, and ops. Hosted APIs amortize hardware across many customers and run heavily optimized inference. Self-hosting tends to win only at sustained high volume, or when privacy/latency requirements force it.",
+    "nuance": "The honest comparison is fully-loaded cost per token at your actual utilization — idle GPU hours are where self-hosting budgets die.",
+    "source_title": "Lenny's Newsletter — build vs. buy in AI",
+    "source_url": "https://www.lennysnewsletter.com/",
+    "source_date": "2024-10-01",
+    "evergreen": true
+  },
+  {
+    "id": "mod-014",
+    "category": "models",
+    "subtopic": "pricing",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "What has happened to the cost of a given level of LLM capability over recent years?",
+    "options": [
+      "It has stayed roughly constant",
+      "It has fallen dramatically — often 10x or more per year for equivalent capability — as models get more efficient and competition intensifies",
+      "It has risen with inflation",
+      "Costs only fall for open-weights models"
+    ],
+    "correct_index": 1,
+    "explanation": "The price of GPT-4-class capability collapsed within two years of its release, as smaller models matched it and providers competed. Product implication: features that are uneconomical today may be cheap next year — design with the cost curve in mind.",
+    "nuance": "Andrew Ng and others argue this favors building aggressively now: prototype at today's prices, scale at tomorrow's.",
+    "source_title": "Andrew Ng — The Batch letters",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2024-11-01",
+    "evergreen": true
+  },
+  {
+    "id": "mod-015",
+    "category": "models",
+    "subtopic": "frontier-labs",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "Anthropic's Claude models earned a particularly strong reputation among developers in 2024–2025 for which use case?",
+    "options": [
+      "Image generation",
+      "Coding and agentic software-engineering tasks",
+      "Music composition",
+      "Real-time translation"
+    ],
+    "correct_index": 1,
+    "explanation": "Claude models (especially the Sonnet line) became a default choice inside AI coding tools like Cursor and GitHub Copilot, and Anthropic leaned into this with Claude Code and strong scores on software-engineering benchmarks like SWE-bench.",
+    "nuance": "Lab specialization is real but shifts fast — always check current comparisons rather than relying on last year's reputation.",
+    "source_title": "Anthropic — Claude model announcements",
+    "source_url": "https://www.anthropic.com/news",
+    "source_date": "2025-05-22",
+    "evergreen": false
+  }
+]

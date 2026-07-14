@@ -1,0 +1,312 @@
+[
+  {
+    "id": "prod-001",
+    "category": "product",
+    "subtopic": "strategy",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "Critics dismiss thin AI products as \"GPT wrappers.\" What's the strongest counterargument from successful AI product builders?",
+    "options": [
+      "Wrappers are illegal, so the criticism is moot",
+      "Defensibility comes from workflow depth, proprietary data, distribution, and UX — not from owning the model; most software is a 'wrapper' around someone's infrastructure",
+      "All AI startups should train their own foundation models",
+      "The criticism is correct and such products always fail"
+    ],
+    "correct_index": 1,
+    "explanation": "Companies like Cursor and Harvey built major businesses 'wrapping' others' models. The moat isn't model access (everyone has it) — it's embedding into workflows, accumulating usage data that improves the product, owning distribution, and out-executing on UX. Databases didn't make every SaaS company a 'Postgres wrapper.'",
+    "nuance": "The real strategic risk isn't being a wrapper — it's building a thin feature the model provider ships natively next quarter. Depth in a workflow is the defense.",
+    "source_title": "Lenny's Podcast — AI startup strategy episodes",
+    "source_url": "https://www.lennysnewsletter.com/podcast",
+    "source_date": "2024-08-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-002",
+    "category": "product",
+    "subtopic": "cost-latency",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "Your LLM API bill is exploding. Analysis shows 80% of requests are simple FAQ-style queries. What's the highest-leverage fix?",
+    "options": [
+      "Negotiate a discount with the provider",
+      "Route simple queries to a much cheaper small model (and/or cache common answers), reserving the frontier model for hard cases",
+      "Remove the AI feature",
+      "Shorten the system prompt by 10%"
+    ],
+    "correct_index": 1,
+    "explanation": "Model routing is the classic cost lever: small models cost 20–60x less and handle simple queries fine. Add caching for repeated questions and prompt caching for shared context, and bills often drop an order of magnitude with no visible quality loss.",
+    "nuance": "Instrument first — you need per-request-type quality metrics to know what's safe to downroute. Routing without evals is just hoping.",
+    "source_title": "Anthropic docs — prompt caching & model selection",
+    "source_url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching",
+    "source_date": "2024-08-14",
+    "evergreen": true
+  },
+  {
+    "id": "prod-003",
+    "category": "product",
+    "subtopic": "ux-patterns",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "Why do well-designed AI products show sources/citations alongside answers?",
+    "options": [
+      "It's required by law",
+      "It builds calibrated trust — users can verify claims, and it honestly signals that AI output can be wrong",
+      "It increases token revenue",
+      "It makes responses look longer"
+    ],
+    "correct_index": 1,
+    "explanation": "Citations let users verify instead of blindly trusting, which matters because models hallucinate. Products like Perplexity and NotebookLM made source-grounding a core UX pattern; enterprise buyers increasingly demand it.",
+    "nuance": "Design for calibrated trust, not maximum trust — a product that makes users appropriately skeptical of AI output serves them better than one that oversells confidence.",
+    "source_title": "Lenny's Newsletter — AI UX patterns",
+    "source_url": "https://www.lennysnewsletter.com/",
+    "source_date": "2024-07-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-004",
+    "category": "product",
+    "subtopic": "cost-latency",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "Users complain your AI feature \"feels slow,\" but total generation time is hard to reduce. What's the standard UX fix?",
+    "options": [
+      "Show a spinner with an apology",
+      "Stream the response token-by-token so users see output immediately — perceived latency matters more than total latency",
+      "Make responses shorter without telling users",
+      "Add a loading progress bar with fake percentages"
+    ],
+    "correct_index": 1,
+    "explanation": "Streaming shows the first words within a few hundred milliseconds, so users start reading while the rest generates. Time-to-first-token, not total time, drives perceived speed — it's why every major chat product streams.",
+    "nuance": "For agentic features that take minutes, the equivalent pattern is narrating progress ('searching docs… found 3 relevant files…') so waiting feels like watching work happen.",
+    "source_title": "Anthropic docs — streaming",
+    "source_url": "https://docs.anthropic.com/en/api/messages-streaming",
+    "source_date": "2024-01-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-005",
+    "category": "product",
+    "subtopic": "strategy",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "When does self-hosting an open-weights model beat calling a hosted API for a product team?",
+    "options": [
+      "Always — APIs are for hobbyists",
+      "Mainly at sustained high volume, or under strict data-residency/privacy constraints, or when you need deep customization — and you have the infra skills to run it",
+      "Never — self-hosting is always worse",
+      "Only when building mobile apps"
+    ],
+    "correct_index": 1,
+    "explanation": "APIs win on simplicity, capability ceiling, and zero ops. Self-hosting wins when volume makes per-token API costs exceed fully-loaded GPU costs, when data can't leave your environment, or when you need custom fine-tunes. Most teams should start with APIs and revisit at scale.",
+    "nuance": "A hybrid pattern is common: API frontier models for hard/low-volume paths, self-hosted small models for high-volume simple paths.",
+    "source_title": "Andrew Ng — The Batch on build vs. buy",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2024-05-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-006",
+    "category": "product",
+    "subtopic": "strategy",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "Andrew Ng famously called AI \"the new electricity.\" What did he mean?",
+    "options": [
+      "AI data centers consume enormous power",
+      "Like electricity a century ago, AI is a general-purpose technology that will transform every industry, not a single product or sector",
+      "AI companies should be regulated as utilities",
+      "AI will replace the power grid"
+    ],
+    "correct_index": 1,
+    "explanation": "Ng's point (from his 2017 Stanford talk onward) is that AI is a horizontal enabler: just as electricity transformed manufacturing, transport, and homes, AI value accrues wherever it's applied — most of it outside the tech industry itself.",
+    "nuance": "His follow-on argument matters for builders: the biggest opportunities are in applying AI to unglamorous domain problems, not in building yet another foundation model.",
+    "source_title": "Andrew Ng — Stanford GSB talk",
+    "source_url": "https://www.gsb.stanford.edu/insights/andrew-ng-why-ai-new-electricity",
+    "source_date": "2017-03-11",
+    "evergreen": true
+  },
+  {
+    "id": "prod-007",
+    "category": "product",
+    "subtopic": "strategy",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "Andrew Ng argues AI has changed the economics of prototyping. What's the practical implication he draws?",
+    "options": [
+      "Prototype less, since AI makes mistakes",
+      "Build many fast, cheap proofs-of-concept — the cost of trying ideas has collapsed, so the winning strategy is running more experiments",
+      "Only build after a 12-month research phase",
+      "Outsource all prototyping to agencies"
+    ],
+    "correct_index": 1,
+    "explanation": "Ng's argument: AI-assisted coding cut prototype cost dramatically, so the bottleneck shifts from engineering capacity to deciding what to build. Teams should try far more ideas, expect most to die, and scale the ones that show real signal.",
+    "nuance": "He pairs this with a speed claim: teams that prototype fast learn fast, and iteration speed is the strongest predictor of AI product success.",
+    "source_title": "Andrew Ng — The Batch letters on fast prototyping",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2025-01-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-008",
+    "category": "product",
+    "subtopic": "evals",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "What does \"eval-driven development\" mean for AI product teams?",
+    "options": [
+      "Letting users vote on every model output",
+      "Building a graded test set of real inputs and expected behavior, then using it to gate every prompt, model, and pipeline change — like unit tests for AI behavior",
+      "Running A/B tests instead of writing code",
+      "Having the model evaluate its own code"
+    ],
+    "correct_index": 1,
+    "explanation": "AI behavior is probabilistic, so 'it looked fine in my three test prompts' guarantees nothing. Eval-driven teams maintain scored test suites from real usage and regression-test every change — it's the discipline that separates reliable AI products from demos.",
+    "nuance": "Start embarrassingly small: even 20 real examples with pass/fail labels beats vibes, and the set grows from production failures.",
+    "source_title": "Lenny's Newsletter — evals as AI PM skill",
+    "source_url": "https://www.lennysnewsletter.com/",
+    "source_date": "2025-03-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-009",
+    "category": "product",
+    "subtopic": "ux-patterns",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "When is a human-in-the-loop design non-negotiable for an AI feature?",
+    "options": [
+      "Whenever the feature uses an LLM at all",
+      "When actions are high-stakes and hard to reverse — sending money, deleting data, medical/legal decisions, external communications",
+      "Only in regulated industries",
+      "Never — automation is the goal"
+    ],
+    "correct_index": 1,
+    "explanation": "The design question is: what's the cost of an error, and can it be undone? Drafting an email can be fully automated because a human hits send. Wiring money cannot. High-stakes + irreversible = human approval gate, regardless of how good the model seems.",
+    "nuance": "The subtle failure is 'rubber-stamp' review — if the human approves everything without reading, you have automation with extra steps. Design review UIs that surface what to check.",
+    "source_title": "Anthropic — Building effective agents",
+    "source_url": "https://www.anthropic.com/research/building-effective-agents",
+    "source_date": "2024-12-19",
+    "evergreen": true
+  },
+  {
+    "id": "prod-010",
+    "category": "product",
+    "subtopic": "strategy",
+    "type": "mc",
+    "difficulty": 3,
+    "prompt": "Beyond per-seat and usage-based pricing, what pricing model gained traction for AI products in 2024–2025?",
+    "options": [
+      "Pay-per-token passed directly to users",
+      "Outcome-based pricing — charging for completed work (resolved tickets, qualified leads) rather than access or usage",
+      "Flat lifetime licenses",
+      "Ad-supported free tiers"
+    ],
+    "correct_index": 1,
+    "explanation": "When AI does work (not just assists), pricing can attach to outcomes: Intercom's Fin charging per resolved support ticket became the canonical example. It aligns vendor incentives with customer value and sidesteps the 'AI reduces seat count' problem eating per-seat SaaS.",
+    "nuance": "Outcome pricing requires trustworthy outcome measurement and confidence in your success rate — you're absorbing performance risk that usage pricing leaves with the customer.",
+    "source_title": "Lenny's Newsletter — AI pricing models",
+    "source_url": "https://www.lennysnewsletter.com/",
+    "source_date": "2024-11-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-011",
+    "category": "product",
+    "subtopic": "strategy",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "Which asset most durably differentiates an AI product as models commoditize?",
+    "options": [
+      "Access to the newest model two weeks early",
+      "Proprietary data, workflow integration, and accumulated user context that competitors can't replicate by calling the same API",
+      "A larger prompt library",
+      "More GPU capacity"
+    ],
+    "correct_index": 1,
+    "explanation": "Everyone can call the same models, so model access differentiates nothing for long. What compounds: data only you have, deep integration into how work actually happens, user history that makes your product smarter for each customer, and distribution.",
+    "nuance": "User-specific context is underrated — a product that has learned an individual user's patterns for a year is painful to switch away from even if a rival's model is better.",
+    "source_title": "Lenny's Podcast — moats in AI",
+    "source_url": "https://www.lennysnewsletter.com/podcast",
+    "source_date": "2024-10-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-012",
+    "category": "product",
+    "subtopic": "ux-patterns",
+    "type": "mc",
+    "difficulty": 3,
+    "prompt": "You're adding AI to a tax-filing product. Errors are costly and users can't easily judge correctness. What's the right autonomy level?",
+    "options": [
+      "Full automation — file taxes without review",
+      "Assistive: AI drafts and flags uncertainty, a human (user or expert) reviews and confirms, and the system makes verification easy",
+      "No AI at all — the domain is too risky",
+      "AI decides autonomously but emails a summary afterward"
+    ],
+    "correct_index": 1,
+    "explanation": "High error cost + low user ability to verify is the danger quadrant. The answer usually isn't 'no AI' (drafting saves real time) but bounded autonomy: AI does the labor, surfaces its uncertainty, and the design actively supports verification rather than burying it.",
+    "nuance": "Match autonomy to (error cost × reversibility × user expertise) per feature, not per product — the same app can safely automate categorization while gating submission.",
+    "source_title": "Lenny's Newsletter — designing AI features",
+    "source_url": "https://www.lennysnewsletter.com/",
+    "source_date": "2025-02-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-013",
+    "category": "product",
+    "subtopic": "adoption",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "Surveys of enterprise AI adoption consistently find the biggest blockers are…",
+    "options": [
+      "Model quality — current AI isn't capable enough",
+      "Trust, security/compliance review, data readiness, and change management — organizational factors, not model capability",
+      "GPU shortages",
+      "Lack of AI vendors to choose from"
+    ],
+    "correct_index": 1,
+    "explanation": "Capability stopped being the bottleneck for most enterprise use cases; the friction is organizational: legal and security sign-off, messy internal data, unclear ROI measurement, and employees' workflow inertia. Selling AI into enterprises means solving those, not demoing a smarter model.",
+    "nuance": "This gap — capability racing ahead of absorption — is why 'boring' integration and change-management work is where much of the enterprise AI value (and money) actually is.",
+    "source_title": "The AI Daily Brief (podcast) — enterprise adoption coverage",
+    "source_url": null,
+    "source_date": "2025-04-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-014",
+    "category": "product",
+    "subtopic": "metrics",
+    "type": "mc",
+    "difficulty": 3,
+    "prompt": "Which metric best indicates an AI feature is actually delivering value?",
+    "options": [
+      "Number of AI queries per day",
+      "Task-level success: completion/acceptance rates (e.g., AI drafts sent without heavy editing, suggestions kept, tickets fully resolved)",
+      "Total tokens generated",
+      "How often the AI button is clicked"
+    ],
+    "correct_index": 1,
+    "explanation": "Usage counts are vanity metrics for AI — users may query five times because the first four answers failed. Acceptance and completion metrics capture whether the AI's work was good enough to use, which is the actual value proposition.",
+    "nuance": "Pair acceptance with a quality audit: high acceptance can also mean rubber-stamping. Sample accepted outputs and grade them independently.",
+    "source_title": "Lenny's Newsletter — measuring AI features",
+    "source_url": "https://www.lennysnewsletter.com/",
+    "source_date": "2025-05-01",
+    "evergreen": true
+  },
+  {
+    "id": "prod-015",
+    "category": "product",
+    "subtopic": "cost-latency",
+    "type": "tf",
+    "difficulty": 2,
+    "prompt": "True or false: Because model prices keep falling, it's safe to design AI products assuming today's cost per query is the long-term cost.",
+    "options": ["True", "False"],
+    "correct_index": 1,
+    "explanation": "False — but in the opposite direction than you'd fear: costs for a given capability have fallen steeply and repeatedly, so features that are marginal at today's prices often become comfortably profitable. The planning mistake is anchoring on current costs and killing ideas the cost curve will rescue.",
+    "nuance": "The counterweight: ambitious products often spend savings immediately on more capable (pricier) models or more inference per task — budgets fall per unit of capability, not always per product.",
+    "source_title": "The AI Daily Brief (podcast) — cost curve coverage",
+    "source_url": null,
+    "source_date": "2025-01-01",
+    "evergreen": true
+  }
+]

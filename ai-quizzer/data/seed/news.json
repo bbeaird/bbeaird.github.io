@@ -1,0 +1,291 @@
+[
+  {
+    "id": "news-001",
+    "category": "news",
+    "subtopic": "releases",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "Why did DeepSeek's R1 release (January 2025) shock the AI industry and briefly crater tech stocks?",
+    "options": [
+      "It was the first model to generate video",
+      "A Chinese lab released an open-weights reasoning model rivaling top US models, reportedly trained at a fraction of the assumed cost — challenging beliefs about compute moats",
+      "It was the first model to pass the bar exam",
+      "It leaked another lab's training data"
+    ],
+    "correct_index": 1,
+    "explanation": "R1 matched OpenAI's o1-class reasoning performance, was released open-weights under MIT license, and DeepSeek claimed strikingly low training costs. Markets read it as a threat to the 'only massive US compute spend wins' thesis — Nvidia lost a record ~$600B in market cap in one day.",
+    "nuance": "The lasting effects: reasoning techniques diffused rapidly into open models, and 'efficiency' joined 'scale' as a competitive axis.",
+    "source_title": "DeepSeek-R1 paper (arXiv) / The AI Daily Brief coverage",
+    "source_url": "https://arxiv.org/abs/2501.12948",
+    "source_date": "2025-01-27",
+    "evergreen": false
+  },
+  {
+    "id": "news-002",
+    "category": "news",
+    "subtopic": "industry",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "What happened to Anthropic's Model Context Protocol (MCP) in 2025 that made it strategically significant?",
+    "options": [
+      "It was deprecated in favor of plugins",
+      "Competing labs — including OpenAI and Google — adopted it, making it a de facto industry standard for connecting AI to tools and data",
+      "It was acquired by Microsoft",
+      "It became a paid enterprise product"
+    ],
+    "correct_index": 1,
+    "explanation": "Rival labs adopting a competitor's protocol is rare; OpenAI and Google embracing MCP in 2025 signaled the industry converging on shared agent-tooling infrastructure. For builders it meant one integration surface instead of per-vendor plugin systems.",
+    "nuance": "Standards adoption is a strategic tell: interoperability layers tend to win when the ecosystem grows faster than any single vendor can.",
+    "source_title": "The AI Daily Brief (podcast) — MCP adoption coverage",
+    "source_url": null,
+    "source_date": "2025-04-01",
+    "evergreen": false
+  },
+  {
+    "id": "news-003",
+    "category": "news",
+    "subtopic": "trends",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "What was arguably the dominant AI product theme of 2025?",
+    "options": [
+      "3D-printed robots",
+      "Agents — especially agentic coding tools (Claude Code, Codex, Cursor agents) doing multi-step work autonomously",
+      "Blockchain-AI integration",
+      "AI-designed fashion"
+    ],
+    "correct_index": 1,
+    "explanation": "2025 was widely dubbed 'the year of agents': coding agents went mainstream, labs shipped computer-use and browser agents, and enterprises piloted agentic workflows. Coding was the breakout domain because outcomes are verifiable — code either runs and passes tests or doesn't.",
+    "nuance": "The verifiability point generalizes: agents succeed first in domains with cheap, objective feedback loops.",
+    "source_title": "The AI Daily Brief (podcast) — year in review",
+    "source_url": null,
+    "source_date": "2025-12-01",
+    "evergreen": false
+  },
+  {
+    "id": "news-004",
+    "category": "news",
+    "subtopic": "research",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "As pre-training gains slowed, what became the industry's major new scaling axis in 2024–2025?",
+    "options": [
+      "Bigger context windows only",
+      "Inference-time compute — letting models 'think longer' via extended reasoning, which improves results without retraining",
+      "More parameters with less data",
+      "Analog computing chips"
+    ],
+    "correct_index": 1,
+    "explanation": "OpenAI's o1 (late 2024) demonstrated that spending more compute at answer time — generating long internal reasoning — yields large gains on hard problems. Every major lab followed with reasoning modes, reshaping both capability roadmaps and inference-cost economics.",
+    "nuance": "It changed infrastructure math too: inference (not just training) became a massive compute consumer, driving the 2025 datacenter buildout.",
+    "source_title": "DeepLearning.AI — The Batch on test-time compute",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2024-12-01",
+    "evergreen": false
+  },
+  {
+    "id": "news-005",
+    "category": "news",
+    "subtopic": "research",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "The 2024 Nobel Prizes made AI history. Which is accurate?",
+    "options": [
+      "Sam Altman won the Peace Prize",
+      "Geoffrey Hinton shared the Physics prize for neural-network foundations, and Demis Hassabis & John Jumper shared Chemistry for AlphaFold's protein-structure prediction",
+      "An AI system was itself awarded a Nobel",
+      "No AI-related work has ever won a Nobel"
+    ],
+    "correct_index": 1,
+    "explanation": "Two Nobels in one year went to AI: Hinton (with Hopfield) for foundational neural-network work, and DeepMind's Hassabis and Jumper (with David Baker) for AlphaFold, which solved protein-structure prediction — a decades-old grand challenge in biology.",
+    "nuance": "AlphaFold is the standard answer to 'has AI actually advanced science?' — its predicted structures are used by millions of researchers.",
+    "source_title": "NobelPrize.org — 2024 Chemistry press release",
+    "source_url": "https://www.nobelprize.org/prizes/chemistry/2024/press-release/",
+    "source_date": "2024-10-09",
+    "evergreen": true
+  },
+  {
+    "id": "news-006",
+    "category": "news",
+    "subtopic": "policy",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "What is the EU AI Act's core regulatory approach?",
+    "options": [
+      "A blanket ban on generative AI in Europe",
+      "Risk-based tiers: banning 'unacceptable risk' uses, imposing strict duties on high-risk systems, and lighter transparency rules elsewhere — phasing in through 2025–2027",
+      "Licensing individual AI users",
+      "Regulating only open-source models"
+    ],
+    "correct_index": 1,
+    "explanation": "The AI Act (in force August 2024, phasing in over years) classifies AI by risk: social scoring is banned; high-risk uses like hiring and credit face conformity requirements; general-purpose models get transparency and systemic-risk duties. It's the world's most comprehensive AI law and a template others watch.",
+    "nuance": "The recurring debate: whether it protects Europeans or handicaps European AI companies — expect this tension in any EU AI news you read.",
+    "source_title": "EU AI Act explorer",
+    "source_url": "https://artificialintelligenceact.eu/",
+    "source_date": "2024-08-01",
+    "evergreen": false
+  },
+  {
+    "id": "news-007",
+    "category": "news",
+    "subtopic": "industry",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "The \"Stargate\" project announced in January 2025 is…",
+    "options": [
+      "OpenAI's video generation model",
+      "A massive US AI-infrastructure venture (OpenAI, SoftBank, Oracle) pledging hundreds of billions for AI datacenters",
+      "A NASA mission using AI",
+      "Google's quantum computer"
+    ],
+    "correct_index": 1,
+    "explanation": "Stargate, announced at the White House, committed up to $500B for US AI datacenters. It exemplified 2025's defining industrial story: compute infrastructure as national strategy, with capital spending at a scale comparable to historic infrastructure programs.",
+    "nuance": "The buildout raised the follow-on debates you'll keep seeing: energy demand, circular vendor financing, and whether capacity is running ahead of revenue.",
+    "source_title": "OpenAI — Announcing the Stargate Project",
+    "source_url": "https://openai.com/index/announcing-the-stargate-project/",
+    "source_date": "2025-01-21",
+    "evergreen": false
+  },
+  {
+    "id": "news-008",
+    "category": "news",
+    "subtopic": "industry",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "In mid-2025, Meta made headlines in the AI talent market by…",
+    "options": [
+      "Freezing all AI hiring",
+      "Forming a 'Superintelligence' lab and recruiting top researchers with reported nine-figure compensation packages",
+      "Outsourcing AI research entirely",
+      "Selling its GPU clusters"
+    ],
+    "correct_index": 1,
+    "explanation": "After a lukewarm Llama 4 reception, Zuckerberg personally recruited elite researchers (including Scale AI's Alexandr Wang) into Meta Superintelligence Labs, with offers reported in the $100M+ range — escalating an industry-wide talent war and signaling that top AI researchers had become the scarcest resource.",
+    "nuance": "Talent-war stories are a useful lens on lab strategy: where the researchers move often predicts where capability moves.",
+    "source_title": "The AI Daily Brief (podcast) — talent war coverage",
+    "source_url": null,
+    "source_date": "2025-07-01",
+    "evergreen": false
+  },
+  {
+    "id": "news-009",
+    "category": "news",
+    "subtopic": "releases",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "Anthropic's Claude 4 generation (May 2025) leaned hardest into which positioning?",
+    "options": [
+      "Consumer entertainment and companionship",
+      "Coding and long-running agentic work — sustained multi-step tasks with tool use",
+      "Real-time video generation",
+      "On-device mobile inference"
+    ],
+    "correct_index": 1,
+    "explanation": "Claude Opus 4 and Sonnet 4 launched with emphasis on software engineering benchmarks and the ability to work autonomously for extended periods — aligned with Anthropic's Claude Code push and its enterprise coding-market strength.",
+    "nuance": "Reading launches for positioning (not just capability claims) tells you each lab's revenue strategy: Anthropic → developers/enterprise, OpenAI → consumer scale + ecosystem, Google → integration everywhere.",
+    "source_title": "Anthropic — Introducing Claude 4",
+    "source_url": "https://www.anthropic.com/news/claude-4",
+    "source_date": "2025-05-22",
+    "evergreen": false
+  },
+  {
+    "id": "news-010",
+    "category": "news",
+    "subtopic": "trends",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "What's driving the push toward small on-device AI models (Apple Intelligence, Gemini Nano)?",
+    "options": [
+      "Small models are more intelligent than large ones",
+      "Privacy (data stays on device), zero-latency offline use, and no per-query cloud costs — worth the capability tradeoff for many everyday tasks",
+      "App stores banned cloud AI",
+      "GPUs stopped working in datacenters"
+    ],
+    "correct_index": 1,
+    "explanation": "On-device models handle summarization, dictation, and assistance without sending data to servers — a privacy story (Apple's angle), a latency story, and a cost story. Hybrid designs route hard queries to cloud models while easy ones stay local.",
+    "nuance": "Watch this boundary move: each generation of phone chips + model distillation pulls more capability on-device, shifting what needs the cloud at all.",
+    "source_title": "The Batch — on-device AI coverage",
+    "source_url": "https://www.deeplearning.ai/the-batch/",
+    "source_date": "2024-06-10",
+    "evergreen": false
+  },
+  {
+    "id": "news-011",
+    "category": "news",
+    "subtopic": "releases",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "OpenAI's GPT-5 launch (August 2025) was notable partly for its architecture choice. What was it?",
+    "options": [
+      "It ran entirely on-device",
+      "A unified system with a router deciding per-query whether to answer fast or engage deeper reasoning — replacing the confusing model-picker menu",
+      "It removed all safety filters",
+      "It was released fully open-source"
+    ],
+    "correct_index": 1,
+    "explanation": "GPT-5 bundled fast and reasoning models behind an automatic router, ending the era of users choosing between confusingly-named models. The rocky rollout (complaints about routing quality and the beloved GPT-4o's removal) became a case study in AI product transitions.",
+    "nuance": "The router concept matters beyond OpenAI: automatic capability-vs-cost routing is becoming standard architecture for AI products generally.",
+    "source_title": "OpenAI — GPT-5 announcement",
+    "source_url": "https://openai.com/index/introducing-gpt-5/",
+    "source_date": "2025-08-07",
+    "evergreen": false
+  },
+  {
+    "id": "news-012",
+    "category": "news",
+    "subtopic": "research",
+    "type": "mc",
+    "difficulty": 1,
+    "prompt": "Why is AlphaFold considered a landmark AI achievement beyond just winning a Nobel?",
+    "options": [
+      "It was the first chatbot",
+      "It solved a 50-year grand-challenge problem — predicting 3D protein structure from amino-acid sequence — and its open database now accelerates drug discovery and biology research worldwide",
+      "It generated the first AI film",
+      "It beat humans at chess"
+    ],
+    "correct_index": 1,
+    "explanation": "Determining a protein's structure used to take years of lab work per protein; AlphaFold predicts structures computationally with experimental-grade accuracy and DeepMind released predictions for essentially every known protein, used by researchers globally.",
+    "nuance": "It's the flagship example of 'AI for science' — a category (materials, weather, math) many researchers consider AI's highest-upside application.",
+    "source_title": "DeepMind — AlphaFold",
+    "source_url": "https://deepmind.google/technologies/alphafold/",
+    "source_date": "2024-10-09",
+    "evergreen": true
+  },
+  {
+    "id": "news-013",
+    "category": "news",
+    "subtopic": "trends",
+    "type": "mc",
+    "difficulty": 2,
+    "prompt": "\"Computer use\" capabilities, which Anthropic first shipped publicly in late 2024, let models…",
+    "options": [
+      "Optimize their own GPU usage",
+      "Operate a computer like a person — viewing the screen, moving the cursor, clicking, and typing — to complete tasks in real software",
+      "Repair hardware faults",
+      "Mine cryptocurrency"
+    ],
+    "correct_index": 1,
+    "explanation": "Computer use lets a model drive actual GUIs — the long tail of software with no API. Anthropic shipped it first in public beta (October 2024); browser-driving agents from other labs followed. It's a key unlock for agents doing real-world office work.",
+    "nuance": "It remains slower and less reliable than API-based tool use — production agent designs prefer APIs where they exist and reserve GUI control for what has no better interface.",
+    "source_title": "Anthropic — computer use announcement",
+    "source_url": "https://www.anthropic.com/news/3-5-models-and-computer-use",
+    "source_date": "2024-10-22",
+    "evergreen": false
+  },
+  {
+    "id": "news-014",
+    "category": "news",
+    "subtopic": "industry",
+    "type": "tf",
+    "difficulty": 2,
+    "prompt": "True or false: By 2025, training-data copyright questions were largely settled law in the US.",
+    "options": ["True", "False"],
+    "correct_index": 1,
+    "explanation": "False. Major suits (NYT v. OpenAI, authors and music labels vs. various labs) were still working through courts, with mixed early rulings — some favoring fair-use arguments for training, others finding liability around pirated source copies, plus large settlements. The legal foundation of the industry remained genuinely unsettled.",
+    "nuance": "Watch two separate questions courts keep splitting: whether training on copyrighted work is fair use, and whether outputs that reproduce it infringe — they can get different answers.",
+    "source_title": "The AI Daily Brief (podcast) — copyright litigation coverage",
+    "source_url": null,
+    "source_date": "2025-06-01",
+    "evergreen": false
+  }
+]
