@@ -1,0 +1,41 @@
+{
+  "_comment": "Content sources for the weekly ingestion job. Feeds that fail to fetch are skipped with a warning — verify URLs if a source never yields items. category_hint biases which quiz categories the generator targets for that source.",
+  "sources": [
+    {
+      "name": "Lenny's Newsletter",
+      "feed": "https://www.lennysnewsletter.com/feed",
+      "site": "https://www.lennysnewsletter.com",
+      "category_hint": "product"
+    },
+    {
+      "name": "The AI Daily Brief (podcast)",
+      "feed": "https://anchor.fm/s/f7cac464/podcast/rss",
+      "site": "https://www.youtube.com/@AIDailyBrief",
+      "category_hint": "news"
+    },
+    {
+      "name": "Import AI (Jack Clark)",
+      "feed": "https://importai.substack.com/feed",
+      "site": "https://importai.substack.com",
+      "category_hint": "news"
+    },
+    {
+      "name": "Simon Willison's Weblog",
+      "feed": "https://simonwillison.net/atom/everything/",
+      "site": "https://simonwillison.net",
+      "category_hint": "tools"
+    },
+    {
+      "name": "DeepLearning.AI — The Batch",
+      "feed": "https://www.deeplearning.ai/the-batch/feed/",
+      "site": "https://www.deeplearning.ai/the-batch/",
+      "category_hint": "fundamentals"
+    },
+    {
+      "name": "OpenAI News",
+      "feed": "https://openai.com/news/rss.xml",
+      "site": "https://openai.com/news",
+      "category_hint": "models"
+    }
+  ]
+}

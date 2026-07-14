@@ -75,24 +75,40 @@ export function getDb(): Database.Database {
   db = new Database(DB_PATH);
   db.pragma("journal_mode = WAL");
   db.exec(SCHEMA);
-  seedIfEmpty(db);
+  syncSeeds(db);
   return db;
 }
 
-function seedIfEmpty(db: Database.Database) {
-  const row = db.prepare("SELECT COUNT(*) AS n FROM questions").get() as { n: number };
-  if (row.n > 0) return;
-
+// data/seed/*.json is the source of truth for the question bank; SQLite owns
+// user data. Upserting by external_id on boot means content edits, newly
+// approved questions, and retirements all take effect on the next deploy,
+// while attempt history stays attached to the same question row.
+function syncSeeds(db: Database.Database) {
   const seedDir = path.join(DATA_DIR, "seed");
   if (!fs.existsSync(seedDir)) return;
 
-  const insert = db.prepare(`
+  const upsert = db.prepare(`
     INSERT INTO questions
       (external_id, category, subtopic, type, difficulty, prompt, options, correct_index,
-       explanation, nuance, source_title, source_url, source_date, evergreen)
+       explanation, nuance, source_title, source_url, source_date, evergreen, status)
     VALUES
       (@external_id, @category, @subtopic, @type, @difficulty, @prompt, @options, @correct_index,
-       @explanation, @nuance, @source_title, @source_url, @source_date, @evergreen)
+       @explanation, @nuance, @source_title, @source_url, @source_date, @evergreen, @status)
+    ON CONFLICT(external_id) DO UPDATE SET
+      category = excluded.category,
+      subtopic = excluded.subtopic,
+      type = excluded.type,
+      difficulty = excluded.difficulty,
+      prompt = excluded.prompt,
+      options = excluded.options,
+      correct_index = excluded.correct_index,
+      explanation = excluded.explanation,
+      nuance = excluded.nuance,
+      source_title = excluded.source_title,
+      source_url = excluded.source_url,
+      source_date = excluded.source_date,
+      evergreen = excluded.evergreen,
+      status = excluded.status
   `);
 
   const files = fs.readdirSync(seedDir).filter((f) => f.endsWith(".json"));
@@ -100,7 +116,9 @@ function seedIfEmpty(db: Database.Database) {
     for (const file of files) {
       const items = JSON.parse(fs.readFileSync(path.join(seedDir, file), "utf-8"));
       for (const q of items) {
-        insert.run({
+        // Anything not explicitly published is withheld from users.
+        const status = q.status === undefined || q.status === "published" ? "published" : q.status;
+        upsert.run({
           external_id: q.id,
           category: q.category,
           subtopic: q.subtopic,
@@ -115,6 +133,7 @@ function seedIfEmpty(db: Database.Database) {
           source_url: q.source_url ?? null,
           source_date: q.source_date ?? null,
           evergreen: q.evergreen === false ? 0 : 1,
+          status,
         });
       }
     }

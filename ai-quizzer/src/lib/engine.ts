@@ -53,6 +53,7 @@ export function selectDailyQuestions(userId: number): number[] {
   const missed = db
     .prepare(
       `SELECT a.question_id AS id FROM attempts a
+       JOIN questions q ON q.id = a.question_id AND q.status = 'published'
        WHERE a.user_id = ? AND a.correct = 0
          AND NOT EXISTS (
            SELECT 1 FROM attempts a2

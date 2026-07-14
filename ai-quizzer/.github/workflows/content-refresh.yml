@@ -1,0 +1,61 @@
+# Weekly content pipeline: ingest new source material into draft questions and
+# audit existing questions for staleness. Opens a PR — merging the PR IS the
+# human review/approval step; nothing reaches users without it.
+#
+# NOTE: GitHub only runs workflows from the repository root's .github/ folder,
+# so this activates once ai-quizzer/ is the root of its own repository (or copy
+# this file to the monorepo root and prefix paths with ai-quizzer/).
+#
+# Required repo secret: ANTHROPIC_API_KEY
+
+name: Weekly content refresh
+
+on:
+  schedule:
+    - cron: "0 12 * * 1" # Mondays 12:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Ingest new source content into draft questions
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/ingest.mjs
+
+      - name: Audit question bank freshness
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/freshness.mjs --verify
+
+      - name: Open review PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: content/weekly-refresh
+          title: "Weekly content refresh: new drafts + freshness audit"
+          commit-message: "Weekly content refresh (drafts + freshness audit)"
+          body: |
+            Automated weekly content pipeline run.
+
+            **Review checklist:**
+            - [ ] Read each draft in `data/review/` — check facts, answer keys, and that nothing reproduces source text
+            - [ ] Move approved questions into a file under `data/seed/` (they go live on next deploy)
+            - [ ] Check questions marked `needs_update` in `data/seed/` — fix and republish, or set `status: "retired"`
+            - [ ] Spot-check `retired` verdicts
+
+            Nothing in this PR reaches users until merged and deployed; drafts in `data/review/` are never served either way.
+          labels: content-pipeline

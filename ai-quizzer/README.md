@@ -47,9 +47,20 @@ Deliberately boring, optimized for a solo maintainer:
 - Every explanation cites its source (shown to the user with a link where a stable one exists).
 - The seed bank (`data/seed/*.json`) was AI-generated and **needs owner review** before any commercial use — treat it as the first batch through the future review queue.
 
+## Content pipeline (weekly refresh + culling)
+
+The question bank stays fresh via two scripts, run weekly by `.github/workflows/content-refresh.yml` (activates once this folder is its own repo root; needs an `ANTHROPIC_API_KEY` repo secret):
+
+1. **Ingestion** (`npm run ingest`) — pulls new items from the RSS feeds in `data/sources.json` (Lenny's, AI Daily Brief, The Batch, Import AI, Simon Willison, OpenAI News), has Claude draft original cited questions from them, and writes drafts to `data/review/`. **Drafts are never served** — the app only loads `data/seed/`.
+2. **Freshness audit** (`npm run freshness -- --verify`) — flags non-evergreen published questions past their category's staleness window (news 240d, models 365d, tools 540d, others 720d), then verifies each with Claude + web search: `keep` (refresh its clock), `needs_update` (human fix required), or `retired` (stops being served). Questions are never deleted, so answer history stays intact.
+
+The workflow opens a PR with the results — **merging the PR is the human review step**. Approve drafts by moving them into `data/seed/`; the app upserts seed files into SQLite on boot, so edits, approvals, and retirements all take effect on the next deploy.
+
+Feed URLs in `data/sources.json` are best-known guesses for each source — a source that logs "skipped" every week needs its URL corrected.
+
 ## Roadmap
 
-- **Phase 2**: spaced-repetition scheduling (FSRS-style) for misses, content pipeline (source → LLM-drafted questions → admin review queue), weekly "what happened in AI" quiz, staleness enforcement, Google OAuth.
+- **Phase 2 (remaining)**: spaced-repetition scheduling (FSRS-style) for misses, in-app review queue UI (PR review covers it for now), weekly "what happened in AI" quiz, Google OAuth.
 - **Phase 3**: confidence-based answering + calibration stats, Stripe billing (freemium), leaderboards/team plans.
 
 ## API
